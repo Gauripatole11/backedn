@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Passkey</title>
+    <style>
+        /* ... previous styles ... */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Register Your Passkey</h2>
+        <div class="form-group">
+            <input type="email" id="email" placeholder="Enter your email" autocomplete="username webauthn">
+        </div>
+        <button onclick="registerPasskey()" id="registerButton">Register Passkey</button>
+        <div id="status" class="status"></div>
+        <div id="error" class="error"></div>
+    </div>
+
+    <script>
+        // Buffer conversion utilities
+        const bufferUtils = {
+            bufferToBase64url(buffer) {
+                const array = new Uint8Array(buffer);
+                let string = '';
+                for (let i = 0; i < array.length; i++) {
+                    string += String.fromCharCode(array[i]);
+                }
+                const base64 = btoa(string);
+                return base64.replace(/\+/g, '-')
+                    .replace(/\//g, '_')
+                    .replace(/=/g, '');
+            },
+
+            base64urlToBuffer(base64url) {
+                const base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+                const padding = '='.repeat((4 - base64.length % 4) % 4);
+                const binary = atob(base64 + padding);
+                const buffer = new Uint8Array(binary.length);
+                for (let i = 0; i < binary.length; i++) {
+                    buffer[i] = binary.charCodeAt(i);
+                }
+                return buffer.buffer;
+            }
+        };
+
+        async function registerPasskey() {
+            const email = document.getElementById('email').value;
+            const statusEl = document.getElementById('status');
+            const errorEl = document.getElementById('error');
+            const button = document.getElementById('registerButton');
+
+            try {
+                if (!email) {
+                    throw new Error('Please enter your email');
+                }
+
+                button.disabled = true;
+                errorEl.textContent = '';
+                statusEl.textContent = 'Starting registration...';
+
+                // Step 1: Start registration
+                const startResponse = await fetch('/api/user/register/begin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email
+                    })
+                });
+
+                if (!startResponse.ok) {
+                    throw new Error('Failed to start registration');
+                }
+
+                const { data } = await startResponse.json();
+
+                // Step 2: Prepare options for WebAuthn
+                const publicKeyCredentialCreationOptions = {
+                    challenge: bufferUtils.base64urlToBuffer(data.options.challenge),
+                    rp: data.options.rp,
+                    user: {
+                        id: bufferUtils.base64urlToBuffer(data.options.user.id),
+                        name: email,
+                        displayName: data.options.user.displayName
+                    },
+                    pubKeyCredParams: data.options.pubKeyCredParams,
+                    timeout: data.options.timeout,
+                    attestation: data.options.attestation,
+                    authenticatorSelection: data.options.authenticatorSelection
+                }
+
+                statusEl.textContent = 'Waiting for your biometric verification...';
+
+                const credential = await navigator.credentials.create({
+                    publicKey: publicKeyCredentialCreationOptions
+                });
+
+                // Format credential data
+                const attestationResponse = {
+                    id: bufferUtils.bufferToBase64url(credential.rawId),
+                    rawId: bufferUtils.bufferToBase64url(credential.rawId),
+                    response: {
+                        clientDataJSON: bufferUtils.bufferToBase64url(
+                            credential.response.clientDataJSON
+                        ),
+                        attestationObject: bufferUtils.bufferToBase64url(
+                            credential.response.attestationObject
+                        )
+                    },
+                    type: credential.type
+                };
+
+                statusEl.textContent = 'Completing registration...';
+                // Step 5: Complete registration
+                const completeResponse = await fetch('/api/user/register/complete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId: data.userId,
+                        attestationResponse
+                    })
+                });
+
+                if (!completeResponse.ok) {
+                    const errorData = await completeResponse.json();
+                    throw new Error(errorData.message || 'Failed to complete registration');
+                }
+
+                const result = await completeResponse.json();
+                statusEl.textContent = 'Passkey registered successfully!';
+
+                if (result.data?.token) {
+                    localStorage.setItem('authToken', result.data.token);
+                    setTimeout(() => window.location.href = '/dashboard', 1000);
+                }
+
+            } catch (error) {
+                console.error('Registration error:', error);
+                errorEl.textContent = error.message;
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "backedn",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon start.js"
+  },
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-validator": "^7.2.0",
+    "fido2-lib": "^3.5.3",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.0",
+    "morgan": "~1.9.1",
+    "qrcode": "^1.5.4",
+    "speakeasy": "^2.0.0",
+    "winston": "^3.16.0"
+  }
+}
