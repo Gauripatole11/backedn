@@ -109,11 +109,7 @@ const securityKeyService = {
     } catch (error) {
       throw new ApiError(500, 'Error generating authentication options: ' + error.message);
     }
-  },
-
-
-
-
+  }
 };
 
 module.exports = securityKeyService;

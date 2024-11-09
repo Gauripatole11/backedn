@@ -44,20 +44,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.json({
         status: "Hosted"
     }).json(200)
 })
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
-});
-
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'register.html'));
-});
 
 app.use('/api/admin', adminRouter);
 app.use('/api/user', usersRouter);

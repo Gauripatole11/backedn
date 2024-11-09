@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const ApiError  = require('../utils/errors');
-const { ROLES } = require('../utils/constants');
 const User = require('../models/user.model');
 
 const authMiddleware = {
@@ -28,7 +27,7 @@ const authMiddleware = {
   },
 
   isAdmin: (req, res, next) => {
-    if (req.user.role !== ROLES.ADMIN) {
+    if (req.user.role !== 'admin') {
       throw new ApiError(403, 'Admin access required');
     }
     next();

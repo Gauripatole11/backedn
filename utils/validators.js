@@ -202,9 +202,7 @@ module.exports = {
         },
         fido: {
             completeRegistration: validateRequest(validators.fido.completeRegistration),
-
             completeAuthentication: validateRequest(validators.fido.completeAuthentication)
-
         }
     },
     patterns,

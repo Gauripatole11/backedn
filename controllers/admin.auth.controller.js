@@ -194,32 +194,6 @@ const adminAuthController = {
             });
         }
     },
-
-    // Admin Logout
-    async logout(req, res) {
-        try {
-            // Create audit log
-            await auditService.createAuditLog({
-                action: 'ADMIN_LOGOUT',
-                performedBy: req.user._id,
-                details: {
-                    ip: req.ip,
-                    userAgent: req.headers['user-agent']
-                }
-            });
-
-            res.json({
-                status: 'success',
-                message: 'Logged out successfully'
-            });
-        } catch (error) {
-            console.error('Admin logout error:', error);
-            res.status(500).json({
-                status: 'error',
-                message: 'Error during logout'
-            });
-        }
-    }
 };
 
 module.exports = adminAuthController;

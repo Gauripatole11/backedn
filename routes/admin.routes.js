@@ -3,14 +3,11 @@ const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/admin.controller');
 const adminAuthController = require('../controllers/admin.auth.controller');
-
 const { authenticateJWT, isAdmin } = require('../middleware/auth.middleware');
 
 // Auth routes (no authentication needed)
 router.post('/login', adminAuthController.login);
 router.post('/register', adminAuthController.register);
-
-
 
 // Apply authentication and admin check to all routes
 router.use(authenticateJWT, isAdmin);
@@ -30,16 +27,6 @@ router.post('/keys/assign',
 
 router.post('/keys/revoke',
     adminController.revokeKey
-);
-
-
-// Audit Log Routes
-router.get('/audit-logs',
-    adminController.getAuditLogs
-);
-
-router.get('/audit-logs/export',
-    adminController.exportAuditLogs
 );
 
 module.exports = router;
