@@ -1,4 +1,6 @@
-// utils/errors/ApiError.js
+const looger = require('./looger');
+
+
 class ApiError extends Error {
   constructor(statusCode, message, details = null) {
     super(message);
@@ -6,6 +8,7 @@ class ApiError extends Error {
     this.details = details;
     this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
     Error.captureStackTrace(this, this.constructor);
+    looger.error(message)
   }
 }
 

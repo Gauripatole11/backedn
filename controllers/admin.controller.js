@@ -8,55 +8,15 @@ const adminController = {
   // Security Key Management
   async getAllKeys(req, res, next) {
     try {
-      const {
-        status,
-        keyType,
-        serialNumber,
-        page = 1,
-        limit = 10,
-        sortBy = 'createdAt',
-        order = 'desc'
-      } = req.query;
-
-      const filters = {
-        status,
-        keyType,
-        serialNumber,
-        page: parseInt(page),
-        limit: parseInt(limit),
-        sort: { [sortBy]: order === 'desc' ? -1 : 1 }
-      };
-
-      const keys = await securityKeyService.searchKeys(filters);
-      const totalKeys = await securityKeyService.countKeys(filters);
-
+      const keys = await securityKeyService.searchKeys();
       res.json({
-        data: keys,
-        pagination: {
-          total: totalKeys,
-          page: parseInt(page),
-          pages: Math.ceil(totalKeys / limit)
-        }
+        data: keys
       });
     } catch (error) {
       next(error);
     }
   },
 
-  async getKeyDetails(req, res, next) {
-    try {
-      const { keyId } = req.params;
-      const keyDetails = await securityKeyService.getKeyDetails(keyId);
-
-      if (!keyDetails) {
-        throw new ApiError(404, 'Security key not found');
-      }
-
-      res.json({ data: keyDetails });
-    } catch (error) {
-      next(error);
-    }
-  },
 
   async registerKey(req, res, next) {
     try {
@@ -88,38 +48,12 @@ const adminController = {
     }
   },
 
-  async registerBulkKeys(req, res, next) {
-    try {
-      const { keys } = req.body;
-
-      if (!Array.isArray(keys) || keys.length === 0) {
-        throw new ApiError(400, 'Invalid keys data provided');
-      }
-
-      const registeredKeys = await securityKeyService.registerBulkKeys(
-        keys,
-        req.user.id
-      );
-
-      res.status(201).json({
-        data: registeredKeys,
-        message: `Successfully registered ${registeredKeys.length} keys`
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
 
   async assignKey(req, res, next) {
     try {
-      const { keyId, userId, expiryDate } = req.body;
+      const { keyId, email } = req.body;
 
-      const assignment = await securityKeyService.assignKey({
-        keyId,
-        userId,
-        assignedBy: req.user.id,
-        expiryDate
-      });
+      const assignment = await securityKeyService.assignKey(keyId,email, req.user.id);
 
       res.json({
         data: assignment,
@@ -132,13 +66,12 @@ const adminController = {
 
   async revokeKey(req, res, next) {
     try {
-      const { keyId, reason } = req.body;
+      const { keyId } = req.body;
 
-      const revocation = await securityKeyService.revokeKey({
+      const revocation = await securityKeyService.revokeKey(
         keyId,
-        revokedBy: req.user.id,
-        reason
-      });
+        req.user.id,
+      );
 
       res.json({
         data: revocation,

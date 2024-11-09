@@ -83,3 +83,64 @@
 {"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T15:07:24.814Z"}
 {"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T15:08:52.138Z"}
 {"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T15:09:01.771Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T17:22:43.052Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T17:24:56.201Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:19:17.541Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:27:11.361Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:28:27.361Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:28:55.827Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:32:17.503Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:35:41.791Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:35:44.697Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:36:36.677Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:36:41.908Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:38:34.565Z"}
+{"level":"error","timestamp":"2024-11-09T18:38:36.974Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:38:36.975Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:39:18.130Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:39:44.286Z"}
+{"level":"error","timestamp":"2024-11-09T18:40:17.494Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:40:17.498Z"}
+{"level":"error","timestamp":"2024-11-09T18:41:14.478Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:41:14.481Z"}
+{"level":"error","timestamp":"2024-11-09T18:41:33.608Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:41:33.610Z"}
+{"level":"error","timestamp":"2024-11-09T18:41:40.498Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:41:40.500Z"}
+{"level":"error","timestamp":"2024-11-09T18:43:19.344Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:43:19.347Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:43:22.722Z"}
+{"level":"error","message":"Error generating authentication options: Cast to ObjectId failed for value \"{\n  keyId: '672f7b34fb8d9f28838c7780',\n  revokedBy: '672deebf288fa5fed50a8841'\n}\" (type Object) at path \"_id\" for model \"SecurityKey\"","timestamp":"2024-11-09T18:43:30.461Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:43:30.462Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:45:41.639Z"}
+{"level":"error","message":"Error generating authentication options: Cast to ObjectId failed for value \"{\n  keyId: '672f7b34fb8d9f28838c7780',\n  revokedBy: '672deebf288fa5fed50a8841'\n}\" (type Object) at path \"_id\" for model \"SecurityKey\"","timestamp":"2024-11-09T18:45:47.144Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:45:47.144Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:48:06.981Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:48:24.291Z"}
+{"level":"error","message":"Error generating authentication options: Cast to ObjectId failed for value \"{\n  keyId: '672f7b34fb8d9f28838c7780',\n  revokedBy: '672deebf288fa5fed50a8841'\n}\" (type Object) at path \"_id\" for model \"SecurityKey\"","timestamp":"2024-11-09T18:48:31.486Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:48:31.487Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:49:07.456Z"}
+{"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T18:50:22.130Z"}
+{"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T18:50:22.132Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:50:22.132Z"}
+{"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T18:50:25.464Z"}
+{"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T18:50:25.466Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:50:25.467Z"}
+{"level":"error","message":"Error verifying registration: this.isAvailableForAssignment is not a function","timestamp":"2024-11-09T18:50:35.491Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T18:50:35.492Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T18:51:12.796Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T19:14:11.447Z"}
+{"level":"error","message":"No security key","timestamp":"2024-11-09T19:16:00.238Z"}
+{"level":"error","message":"Error generating authentication options: No security key","timestamp":"2024-11-09T19:16:00.239Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T19:16:00.240Z"}
+{"level":"error","message":"No security key","timestamp":"2024-11-09T19:16:05.826Z"}
+{"level":"error","message":"Error generating authentication options: No security key","timestamp":"2024-11-09T19:16:05.828Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T19:16:05.828Z"}
+{"level":"error","message":"No security key","timestamp":"2024-11-09T19:16:06.999Z"}
+{"level":"error","message":"Error generating authentication options: No security key","timestamp":"2024-11-09T19:16:07.001Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T19:16:07.001Z"}
+{"level":"error","message":"No security key","timestamp":"2024-11-09T19:16:59.595Z"}
+{"level":"error","message":"Error generating authentication options: No security key","timestamp":"2024-11-09T19:16:59.595Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T19:16:59.596Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T19:23:36.432Z"}
+{"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T19:24:54.765Z"}

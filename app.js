@@ -7,6 +7,7 @@ var adminRouter = require('./routes/admin.routes');
 var usersRouter = require('./routes/users.routes');
 const { createInitialAdmin } = require('./utils/initSetup');
 const ApiError = require('./utils/errors');
+const looger = require('./utils/looger')
 
 const cors = require('cors')
 
@@ -45,9 +46,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.json({
-        status:"Hosted"
+        status: "Hosted"
     }).json(200)
 })
 app.get('/login', (req, res) => {
@@ -63,8 +64,9 @@ app.use('/api/user', usersRouter);
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
+    looger.error(err);
     if (err instanceof ApiError) {
-        
+
         return res.status(err.statusCode).json({
             status: err.status,
             message: err.message,
@@ -92,8 +94,8 @@ app.use((err, req, res, next) => {
     // Default error
     return res.status(500).json({
         status: 'error',
-        message: process.env.NODE_ENV === 'development' 
-            ? err.message 
+        message: process.env.NODE_ENV === 'development'
+            ? err.message
             : 'Internal Server Error',
         details: process.env.NODE_ENV === 'development' ? err.stack : null
     });

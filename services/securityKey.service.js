@@ -1,6 +1,10 @@
 // services/securityKey.service.js
 const SecurityKey = require('../models/securityKeys.model');
 const AuditLog = require('../models/auditLog.model');
+const KeyAssignment = require('../models/keyAssignment.model');
+const ApiError = require('../utils/errors');
+const User = require('../models/user.model');
+const auditService = require('./audit.service');
 
 const securityKeyService = {
   // Register a new security key
@@ -26,101 +30,10 @@ const securityKeyService = {
     return key;
   },
 
-  async countKeys(filters = {}) {
-    try {
-      const query = this._buildFilterQuery(filters);
-      return await SecurityKey.countDocuments(query);
-    } catch (error) {
-      throw new Error(`Error counting keys: ${error.message}`);
-    }
-  },
-
-  // Helper method to build filter query
-  _buildFilterQuery(filters) {
-    const query = {};
-
-    // Status filter
-    if (filters.status) {
-      query.status = filters.status;
-    }
-
-    // Key type filter
-    if (filters.keyType) {
-      query.keyType = filters.keyType;
-    }
-
-    // Search by serial number or nickname
-    if (filters.search) {
-      query.$or = [
-        { serialNumber: new RegExp(filters.search, 'i') },
-        { nickname: new RegExp(filters.search, 'i') }
-      ];
-    }
-
-    // Date range filter
-    if (filters.startDate || filters.endDate) {
-      query.createdAt = {};
-      if (filters.startDate) {
-        query.createdAt.$gte = new Date(filters.startDate);
-      }
-      if (filters.endDate) {
-        query.createdAt.$lte = new Date(filters.endDate);
-      }
-    }
-
-    return query;
-  },
-
-  // Get key with full assignment history
-  async getKeyDetails(keyId) {
-    return SecurityKey.findById(keyId)
-      .populate({
-        path: 'currentAssignment',
-        model: 'KeyAssignment',
-        populate: {
-          path: 'userId',
-          model: 'User',
-          select: 'email firstName lastName'  // Select specific fields
-        }
-      })
-      .populate('assignmentHistory')
-      .populate('createdBy', 'email firstName lastName')
-      .populate('updatedBy', 'email firstName lastName');
-  },
-
-  // Bulk key registration
-  async registerBulkKeys(keysData, registeredBy) {
-    const keys = keysData.map(keyData => ({
-      ...keyData,
-      createdBy: registeredBy,
-      activationDate: new Date()
-    }));
-
-    const registeredKeys = await SecurityKey.insertMany(keys);
-
-    // Bulk create audit logs
-    const auditLogs = registeredKeys.map(key => ({
-      action: 'KEY_REGISTERED',
-      performedBy: registeredBy,
-      resourceId: key._id,
-      details: {
-        serialNumber: key.serialNumber,
-        keyType: key.keyType,
-        bulkRegistration: true
-      }
-    }));
-
-    await AuditLog.insertMany(auditLogs);
-
-    return registeredKeys;
-  },
 
   // Search keys with filters
-  async searchKeys(filters) {
-    const query = this._buildFilterQuery(filters);
-
-
-    return SecurityKey.find(query)
+  async searchKeys() {
+    return SecurityKey.find()
       .populate({
         path: 'currentAssignment',
         model: 'KeyAssignment',
@@ -133,41 +46,74 @@ const securityKeyService = {
       .sort({ createdAt: -1 });
   },
 
-  // Generate key inventory report
-  async generateInventoryReport() {
-    const stats = await SecurityKey.aggregate([
-      {
-        $group: {
-          _id: {
-            status: '$status',
-            keyType: '$keyType'
-          },
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $group: {
-          _id: '$_id.status',
-          types: {
-            $push: {
-              type: '$_id.keyType',
-              count: '$count'
-            }
-          },
-          totalCount: { $sum: '$count' }
-        }
+  async revokeKey(keyId,revokedBy) {
+    try {
+
+      const securityKey = await SecurityKey.findById(keyId);
+
+      if (!securityKey) {
+        throw new ApiError(400, 'No security key');
       }
-    ]);
+      const activeAssignments = await KeyAssignment.findByIdAndDelete(securityKey.currentAssignment);
+      securityKey.currentAssignment = undefined;
+      securityKey.status = "available";
+      securityKey.userHandle = undefined;
+      securityKey.revokedAt= Date.now();
+      securityKey.revokedBy = revokedBy;
+      await securityKey.save();
 
-    const expiringKeys = await SecurityKey.findExpiringSoon();
+      await auditService.createAuditLog({
+        action: 'KEY_REVOKED',
+        performedBy: revokedBy,
+        resourceId: securityKey._id,
+        details: {
+          assignmentId: securityKey.currentAssignment,
+          timestamp: new Date()
+        }
+      });
+      return true;
+    } catch (error) {
+      throw new ApiError(500, 'Error generating authentication options: ' + error.message);
+    }
+  },
 
-    return {
-      inventory: stats,
-      expiringKeys,
-      totalKeys: await SecurityKey.countDocuments(),
-      lastUpdated: new Date()
-    };
-  }
+
+  async assignKey(keyId, email, assignedBy) {
+    try {
+
+      const securityKey = await SecurityKey.findById(keyId);
+
+      if (!securityKey) {
+        throw new ApiError(400, 'No security key');
+      }
+
+      const user = await User.findOne({
+        email: email
+      });
+
+      if (!user) {
+        throw new ApiError(400, 'No user');
+      }
+      const assignment = await securityKey.assign(user._id, assignedBy);
+
+      await auditService.createAuditLog({
+        action: 'KEY_ASSIGNED',
+        performedBy: assignedBy,
+        resourceId: securityKey._id,
+        details: {
+          assignmentId: assignment._id,
+          timestamp: new Date()
+        }
+      });
+      return assignment;
+    } catch (error) {
+      throw new ApiError(500, 'Error generating authentication options: ' + error.message);
+    }
+  },
+
+
+
+
 };
 
 module.exports = securityKeyService;

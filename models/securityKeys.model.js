@@ -56,6 +56,12 @@ const securityKeySchema = new mongoose.Schema({
     default: Date.now
   },
   revokedAt: Date,
+  revokedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null
+  },
+
   deviceName: {
     type: String,
     default: 'Security Key'
@@ -67,11 +73,10 @@ const securityKeySchema = new mongoose.Schema({
 
 // Methods
 securityKeySchema.methods = {
-  // Check if key is available for assignment
-  isAvailableForAssignment() {
-    return this.status === 'available' && !this.currentAssignment;
-  },
-
+// Check if key is available for assignment
+isAvailableForAssignment() {
+  return this.status === 'available' && !this.currentAssignment;
+},
   // Assign key to user
   async assign(userId, assignedBy) {
     if (!this.isAvailableForAssignment()) {
@@ -87,24 +92,6 @@ securityKeySchema.methods = {
     this.status = 'assigned';
     this.currentAssignment = assignment._id;
     await this.save();
-    return assignment;
-  },
-
-  // Revoke current assignment
-  async revoke() {
-    if (!this.currentAssignment) {
-      throw new Error('Key is not currently assigned');
-    }
-    const assignment = await KeyAssignment.findById(this.currentAssignment);
-    if (assignment) {
-      assignment.status = 'revoked';
-      await assignment.save();
-    }
-
-    this.status = 'available';
-    this.currentAssignment = null;
-    await this.save();
-
     return assignment;
   }
 };

@@ -305,10 +305,6 @@ class Fido2Service {
     await Challenge.deleteMany({ userId, type });
   }
 
-  async cleanupChallenges() {
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-    await Challenge.deleteMany({ createdAt: { $lt: fiveMinutesAgo } });
-  }
 }
 
 module.exports = new Fido2Service();

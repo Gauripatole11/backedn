@@ -20,16 +20,8 @@ router.get('/keys',
     adminController.getAllKeys
 );
 
-router.get('/keys/:keyId',
-    adminController.getKeyDetails
-);
-
 router.post('/keys',
     adminController.registerKey
-);
-
-router.post('/keys/bulk',
-    adminController.registerBulkKeys
 );
 
 router.post('/keys/assign',
@@ -40,14 +32,6 @@ router.post('/keys/revoke',
     adminController.revokeKey
 );
 
-// Dashboard & Reports Routes
-router.get('/dashboard/stats',
-    adminController.getDashboardStats
-);
-
-router.get('/reports/inventory',
-    adminController.generateInventoryReport
-);
 
 // Audit Log Routes
 router.get('/audit-logs',
