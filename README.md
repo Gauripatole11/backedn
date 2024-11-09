@@ -78,7 +78,7 @@ npm start
 - Error handling and logging
 
 ## Startup
-[Admin Startup](/startup)
+[Admin Startup](http://localhost/startup)
 
 ## Repository
 [Backend Repository](https://github.com/Gauripatole11/backedn)
