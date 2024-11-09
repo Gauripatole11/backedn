@@ -203,3 +203,23 @@
 {"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T20:32:58.971Z"}
 {"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T20:32:58.973Z"}
 {"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T20:32:58.974Z"}
+{"level":"error","message":"Email or Employee ID already registered","timestamp":"2024-11-09T21:03:44.475Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T21:03:44.480Z"}
+{"level":"error","message":"User not found","timestamp":"2024-11-09T21:03:52.306Z"}
+{"details":null,"level":"error","status":"fail","statusCode":404,"timestamp":"2024-11-09T21:03:52.307Z"}
+{"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T21:04:01.465Z"}
+{"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T21:04:01.467Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T21:04:01.467Z"}
+{"level":"error","message":"Error verifying registration: clientData challenge mismatch","timestamp":"2024-11-09T21:04:33.949Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T21:04:33.950Z"}
+{"level":"error","message":"Error verifying registration: clientData challenge mismatch","timestamp":"2024-11-09T21:07:32.359Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T21:07:32.360Z"}
+{"level":"info","message":"Initial admin account created successfully","timestamp":"2024-11-09T21:08:44.809Z"}
+{"level":"info","message":"Admin Email:","timestamp":"2024-11-09T21:08:44.811Z"}
+{"level":"info","message":"Admin Password:","timestamp":"2024-11-09T21:08:44.811Z"}
+{"base32":"JVNTWWRJJVHTYYJ6KRXGSRRMMVAESY2A","level":"info","message":"MFA Secret:","otpauthUrl":"otpauth://totp/SecureVaultPro?secret=JVNTWWRJJVHTYYJ6KRXGSRRMMVAESY2A","timestamp":"2024-11-09T21:08:44.811Z"}
+{"level":"info","message":"Please change these credentials after first login","timestamp":"2024-11-09T21:08:44.812Z"}
+{"level":"info","message":"QR Code URL:","timestamp":"2024-11-09T21:08:44.812Z"}
+{"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T21:10:09.146Z"}
+{"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T21:10:09.146Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T21:10:09.148Z"}
