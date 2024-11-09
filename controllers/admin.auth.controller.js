@@ -2,102 +2,18 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
-const { validate } = require('../utils/validators');
-const { generateMFASecret, verifyMFAToken } = require('../utils/mfa');
 const auditService = require('../services/audit.service');
+const { verifyMFAToken } = require('../utils/mfa');
 
 const adminAuthController = {
-    // Admin Registration
-    async register(req, res) {
-        try {
-            // Validate request body
-            const { errors, value } = validate.user.register(req.body);
-
-            if (errors) {
-                return res.status(400).json({
-                    status: 'error',
-                    errors
-                });
-            }
-
-            // Check if admin already exists
-            const existingAdmin = await User.findOne({
-                $or: [
-                    { email: value.email },
-                    { adminId: value.adminId }
-                ]
-            });
-
-            if (existingAdmin) {
-                return res.status(400).json({
-                    status: 'error',
-                    message: 'Admin with this email or ID already exists'
-                });
-            }
-
-            // Generate MFA secret
-            const mfaSecret = generateMFASecret();
-
-            // Hash password
-            const hashedPassword = await bcrypt.hash(value.password, 10);
-
-            // Create admin user
-            const admin = new User({
-                ...value,
-                password: hashedPassword,
-                role: 'admin',
-                mfaEnabled: true,
-                mfaSecret
-            });
-
-            await admin.save();
-
-            // Create audit log
-            await auditService.createAuditLog({
-                action: 'ADMIN_REGISTERED',
-                performedBy: req.user?._id || admin._id,
-                targetUserId: admin._id,
-                details: {
-                    email: admin.email,
-                    adminId: admin.adminId
-                }
-            });
-
-            // Return MFA secret for initial setup
-            res.status(201).json({
-                status: 'success',
-                message: 'Admin registration pending approval',
-                data: {
-                    mfaSecret,
-                    mfaQRCode: `otpauth://totp/SecureVaultPro:${admin.email}?secret=${mfaSecret}&issuer=SecureVaultPro`,
-                }
-            });
-
-        } catch (error) {
-            console.error('Admin registration error:', error);
-            res.status(500).json({
-                status: 'error',
-                message: 'Error registering admin'
-            });
-        }
-    },
 
     // Admin Login
     async login(req, res) {
         try {
-            // Validate request body
-            const { errors, value } = validate.user.login(req.body);
-
-            if (errors) {
-                return res.status(400).json({
-                    status: 'error',
-                    errors
-                });
-            }
-
+            let { email, password, mfaCode } = req.body
             // Find admin user
             const admin = await User.findOne({
-                email: value.email,
+                email: email,
                 role: { $in: ['admin'] }
             });
 
@@ -109,7 +25,7 @@ const adminAuthController = {
             }
 
             // Check password
-            const isPasswordValid = await bcrypt.compare(value.password, admin.password);
+            const isPasswordValid = await bcrypt.compare(password, admin.password);
             if (!isPasswordValid) {
                 await auditService.createAuditLog({
                     action: 'ADMIN_LOGIN_FAILED',
@@ -128,7 +44,7 @@ const adminAuthController = {
 
             if (admin.mfaEnabled) {
                 // Verify MFA token
-                const isMFAValid = verifyMFAToken(admin.mfaSecret, value.mfaCode);
+                const isMFAValid = verifyMFAToken(admin.mfaSecret, mfaCode);
                 if (!isMFAValid) {
                     await auditService.createAuditLog({
                         action: 'ADMIN_LOGIN_FAILED',

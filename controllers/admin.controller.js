@@ -1,7 +1,6 @@
 // controllers/admin.controller.js
 const securityKeyService = require('../services/securityKey.service');
 const auditService = require('../services/audit.service');
-const { validate } = require('../utils/validators');
 
 const adminController = {
   // Security Key Management
@@ -11,37 +10,6 @@ const adminController = {
       res.json({
         data: keys
       });
-    } catch (error) {
-      next(error);
-    }
-  },
-
-
-  async registerKey(req, res, next) {
-    try {
-      const keyData = req.body;
-      const { errors, value } = validate.key.register(keyData);
-
-      if (errors) {
-        return res.status(400).json({
-          status: 'error',
-          errors
-        });
-      }
-
-      const newKey = await securityKeyService.registerKey(value, req.user.id);
-
-      await auditService.createAuditLog({
-        action: 'KEY_REGISTERED',
-        performedBy: req.user.id,
-        resourceId: newKey._id,
-        details: {
-          serialNumber: newKey.serialNumber,
-          keyType: newKey.keyType
-        }
-      });
-
-      res.status(201).json({ data: newKey });
     } catch (error) {
       next(error);
     }

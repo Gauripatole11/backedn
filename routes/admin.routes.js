@@ -7,7 +7,6 @@ const { authenticateJWT, isAdmin } = require('../middleware/auth.middleware');
 
 // Auth routes (no authentication needed)
 router.post('/login', adminAuthController.login);
-router.post('/register', adminAuthController.register);
 
 // Apply authentication and admin check to all routes
 router.use(authenticateJWT, isAdmin);
@@ -17,9 +16,6 @@ router.get('/keys',
     adminController.getAllKeys
 );
 
-router.post('/keys',
-    adminController.registerKey
-);
 
 router.post('/keys/assign',
     adminController.assignKey

@@ -51,6 +51,25 @@ class Fido2Service {
     }
   }
 
+
+  async generateRegistrationOptionsAdmin() {
+    try {
+      const registrationOptions = await this.f2l.attestationOptions();
+
+      const challengeBase64 = base64url.encode(Buffer.from(registrationOptions.challenge));
+      await this._storeChallenge(user.id, challengeBase64, 'registration');
+      const options = {
+        ...registrationOptions,
+        challenge: challengeBase64
+      };
+
+      return options;
+    } catch (error) {
+      console.error('Error generating registration options:', error);
+      throw error;
+    }
+  }
+
   async verifyRegistration(attestationResponse, userId) {
     try {
 

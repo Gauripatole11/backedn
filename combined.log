@@ -168,3 +168,38 @@
 {"base32":"GJSHWI35GQUSSL2UINED44RZKNKGWKTG","level":"info","message":"MFA Secret:","otpauthUrl":"otpauth://totp/SecureVaultPro?secret=GJSHWI35GQUSSL2UINED44RZKNKGWKTG","timestamp":"2024-11-09T19:47:15.662Z"}
 {"level":"info","message":"Please change these credentials after first login","timestamp":"2024-11-09T19:47:15.663Z"}
 {"level":"info","message":"QR Code URL:","timestamp":"2024-11-09T19:47:15.663Z"}
+{"level":"error","message":"Invalid or inactive user","timestamp":"2024-11-09T19:52:59.064Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T19:52:59.066Z"}
+{"level":"info","message":"Initial admin account created successfully","timestamp":"2024-11-09T20:03:31.512Z"}
+{"level":"info","message":"Admin Email:","timestamp":"2024-11-09T20:03:31.518Z"}
+{"level":"info","message":"Admin Password:","timestamp":"2024-11-09T20:03:31.518Z"}
+{"base32":"EY3DIJTRGAVHGNCGPNUVIJJJNNYGYUDJ","level":"info","message":"MFA Secret:","otpauthUrl":"otpauth://totp/SecureVaultPro?secret=EY3DIJTRGAVHGNCGPNUVIJJJNNYGYUDJ","timestamp":"2024-11-09T20:03:31.518Z"}
+{"level":"info","message":"Please change these credentials after first login","timestamp":"2024-11-09T20:03:31.518Z"}
+{"level":"info","message":"QR Code URL:","timestamp":"2024-11-09T20:03:31.518Z"}
+{"level":"error","message":"No user","timestamp":"2024-11-09T20:05:41.043Z"}
+{"level":"error","message":"Error generating authentication options: No user","timestamp":"2024-11-09T20:05:41.047Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T20:05:41.048Z"}
+{"level":"info","message":"Initial admin account created successfully","timestamp":"2024-11-09T20:23:49.901Z"}
+{"level":"info","message":"Admin Email:","timestamp":"2024-11-09T20:23:49.912Z"}
+{"level":"info","message":"Admin Password:","timestamp":"2024-11-09T20:23:49.912Z"}
+{"base32":"ORYCCV2TLBQSKXR6HREVUSBFFFEEYZRO","level":"info","message":"MFA Secret:","otpauthUrl":"otpauth://totp/SecureVaultPro?secret=ORYCCV2TLBQSKXR6HREVUSBFFFEEYZRO","timestamp":"2024-11-09T20:23:49.912Z"}
+{"level":"info","message":"Please change these credentials after first login","timestamp":"2024-11-09T20:23:49.912Z"}
+{"level":"info","message":"QR Code URL:","timestamp":"2024-11-09T20:23:49.913Z"}
+{"level":"error","message":"Invalid or inactive user","timestamp":"2024-11-09T20:25:55.809Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T20:25:55.812Z"}
+{"level":"error","message":"Invalid or inactive user","timestamp":"2024-11-09T20:25:56.129Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T20:25:56.130Z"}
+{"level":"info","message":"Initial admin account created successfully","timestamp":"2024-11-09T20:28:33.699Z"}
+{"level":"info","message":"Admin Email:","timestamp":"2024-11-09T20:28:33.703Z"}
+{"level":"info","message":"Admin Password:","timestamp":"2024-11-09T20:28:33.703Z"}
+{"base32":"EMZWY6TGMVWT6PSYEVHHIURGFBAFAYLW","level":"info","message":"MFA Secret:","otpauthUrl":"otpauth://totp/SecureVaultPro?secret=EMZWY6TGMVWT6PSYEVHHIURGFBAFAYLW","timestamp":"2024-11-09T20:28:33.703Z"}
+{"level":"info","message":"Please change these credentials after first login","timestamp":"2024-11-09T20:28:33.704Z"}
+{"level":"info","message":"QR Code URL:","timestamp":"2024-11-09T20:28:33.704Z"}
+{"level":"error","message":"Email or Employee ID already registered","timestamp":"2024-11-09T20:30:41.965Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T20:30:41.969Z"}
+{"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T20:30:57.154Z"}
+{"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T20:30:57.154Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T20:30:57.155Z"}
+{"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T20:32:58.971Z"}
+{"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T20:32:58.973Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T20:32:58.974Z"}

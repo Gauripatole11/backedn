@@ -37,3 +37,20 @@
 {"level":"error","message":"No security key","timestamp":"2024-11-09T19:16:59.595Z"}
 {"level":"error","message":"Error generating authentication options: No security key","timestamp":"2024-11-09T19:16:59.595Z"}
 {"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T19:16:59.596Z"}
+{"level":"error","message":"Invalid or inactive user","timestamp":"2024-11-09T19:52:59.064Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T19:52:59.066Z"}
+{"level":"error","message":"No user","timestamp":"2024-11-09T20:05:41.043Z"}
+{"level":"error","message":"Error generating authentication options: No user","timestamp":"2024-11-09T20:05:41.047Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T20:05:41.048Z"}
+{"level":"error","message":"Invalid or inactive user","timestamp":"2024-11-09T20:25:55.809Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T20:25:55.812Z"}
+{"level":"error","message":"Invalid or inactive user","timestamp":"2024-11-09T20:25:56.129Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T20:25:56.130Z"}
+{"level":"error","message":"Email or Employee ID already registered","timestamp":"2024-11-09T20:30:41.965Z"}
+{"details":null,"level":"error","status":"fail","statusCode":401,"timestamp":"2024-11-09T20:30:41.969Z"}
+{"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T20:30:57.154Z"}
+{"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T20:30:57.154Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T20:30:57.155Z"}
+{"level":"error","message":"No security keys assigned to this user","timestamp":"2024-11-09T20:32:58.971Z"}
+{"level":"error","message":"Error generating authentication options: No security keys assigned to this user","timestamp":"2024-11-09T20:32:58.973Z"}
+{"details":null,"level":"error","status":"error","statusCode":500,"timestamp":"2024-11-09T20:32:58.974Z"}
