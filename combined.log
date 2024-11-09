@@ -149,3 +149,22 @@
 {"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T19:29:04.682Z"}
 {"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T19:31:26.240Z"}
 {"level":"info","message":"Admin account already exists","timestamp":"2024-11-09T19:32:36.693Z"}
+{"level":"info","message":"Initial admin account created successfully","timestamp":"2024-11-09T19:40:06.871Z"}
+{"level":"info","message":"Initial admin account created successfully","timestamp":"2024-11-09T19:42:06.417Z"}
+{"level":"info","message":"Admin Email:","timestamp":"2024-11-09T19:42:06.420Z"}
+{"level":"info","message":"Admin Password:","timestamp":"2024-11-09T19:42:06.420Z"}
+{"base32":"JUZTC42BMRKW45S2FE7GENTRONLTKYRT","level":"info","message":"MFA Secret:","otpauthUrl":"otpauth://totp/SecureVaultPro?secret=JUZTC42BMRKW45S2FE7GENTRONLTKYRT","timestamp":"2024-11-09T19:42:06.420Z"}
+{"level":"info","message":"Please change these credentials after first login","timestamp":"2024-11-09T19:42:06.421Z"}
+{"level":"info","message":"QR Code URL:","timestamp":"2024-11-09T19:42:06.421Z"}
+{"level":"info","message":"Initial admin account created successfully","timestamp":"2024-11-09T19:46:50.074Z"}
+{"level":"info","message":"Admin Email:","timestamp":"2024-11-09T19:46:50.081Z"}
+{"level":"info","message":"Admin Password:","timestamp":"2024-11-09T19:46:50.081Z"}
+{"base32":"IVNUGSTMHBEXUTSTJVSEI4L5EVTW2MLJ","level":"info","message":"MFA Secret:","otpauthUrl":"otpauth://totp/SecureVaultPro?secret=IVNUGSTMHBEXUTSTJVSEI4L5EVTW2MLJ","timestamp":"2024-11-09T19:46:50.081Z"}
+{"level":"info","message":"Please change these credentials after first login","timestamp":"2024-11-09T19:46:50.081Z"}
+{"level":"info","message":"QR Code URL:","timestamp":"2024-11-09T19:46:50.081Z"}
+{"level":"info","message":"Initial admin account created successfully","timestamp":"2024-11-09T19:47:15.660Z"}
+{"level":"info","message":"Admin Email:","timestamp":"2024-11-09T19:47:15.662Z"}
+{"level":"info","message":"Admin Password:","timestamp":"2024-11-09T19:47:15.662Z"}
+{"base32":"GJSHWI35GQUSSL2UINED44RZKNKGWKTG","level":"info","message":"MFA Secret:","otpauthUrl":"otpauth://totp/SecureVaultPro?secret=GJSHWI35GQUSSL2UINED44RZKNKGWKTG","timestamp":"2024-11-09T19:47:15.662Z"}
+{"level":"info","message":"Please change these credentials after first login","timestamp":"2024-11-09T19:47:15.663Z"}
+{"level":"info","message":"QR Code URL:","timestamp":"2024-11-09T19:47:15.663Z"}
