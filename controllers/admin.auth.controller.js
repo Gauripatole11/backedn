@@ -102,7 +102,7 @@ const adminAuthController = {
             });
 
             if (!admin) {
-                return res.status(401).json({
+                return res.status(404).json({
                     status: 'error',
                     message: 'Invalid credentials'
                 });
@@ -120,7 +120,7 @@ const adminAuthController = {
                     }
                 });
 
-                return res.status(401).json({
+                return res.status(404).json({
                     status: 'error',
                     message: 'Invalid credentials'
                 });
@@ -139,7 +139,7 @@ const adminAuthController = {
                         }
                     });
 
-                    return res.status(401).json({
+                    return res.status(404).json({
                         status: 'error',
                         message: 'Invalid MFA code'
                     });

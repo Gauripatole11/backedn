@@ -48,7 +48,6 @@ const securityKeySchema = new mongoose.Schema({
   },
   userHandle: {
     type: String,
-    required: true,
     index: true
   },
   // Timestamps

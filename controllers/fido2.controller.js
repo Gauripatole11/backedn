@@ -154,10 +154,13 @@ const fido2Controller = {
       let payload = {
         email: user.email,
         firstName: user.firstName,
-        lastName: user.lastName
+        lastName: user.lastName,
+        id: user._id,
+        role: user.role,
+        department: user.department,
+        createdAt: user.createdAt
       }
-      const token = jwt.sign(
-        { userId: user._id },
+      const token = jwt.sign(payload,
         process.env.JWT_SECRET,
         { expiresIn: '24h' }
       );
@@ -166,14 +169,7 @@ const fido2Controller = {
         status: 'success',
         data: {
           token,
-          user: {
-            id: user._id,
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            role: user.role,
-            department: user.department
-          }
+          user:payload
         }
       });
     }

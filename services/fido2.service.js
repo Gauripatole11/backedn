@@ -12,15 +12,15 @@ class Fido2Service {
   constructor() {
     this.f2l = new Fido2Lib({
       timeout: 60000,
-      rpId: process.env.RPID,
+      rpId: process.env.RPID,  // Ensure this matches your exact domain
       rpName: "SecureVault Pro",
       challengeSize: 32,
       attestation: "direct",
       cryptoParams: [-7, -257],
-      authenticatorAttachment: "platform",
       authenticatorRequireResidentKey: false,
-      authenticatorUserVerification: "preferred"
-    });
+      authenticatorUserVerification: "required", 
+  });
+  
   }
 
   async generateRegistrationOptions(user) {
@@ -31,6 +31,7 @@ class Fido2Service {
         name: user.email,
         displayName: user.displayName
       };
+
 
       const challengeBase64 = base64url.encode(Buffer.from(registrationOptions.challenge));
       await this._storeChallenge(user.id, challengeBase64, 'registration');
@@ -172,7 +173,13 @@ class Fido2Service {
       assertionOptions.allowCredentials = securityKeys.map(key => ({
         type: 'public-key',
         id: key.credentialId,
-        transports: ['usb', 'nfc', 'ble']
+        ttransports: [
+          'ble',           // Bluetooth Low Energy (BLE)
+          'internal',      // Platform authenticator (TouchID, FaceID, Windows Hello)
+          'nfc',          // Near Field Communication (NFC)
+          'usb',          // USB authenticators
+          'hybrid'        // Hybrid transport
+        ]
       }));
       // Convert challenge to string for storage
 

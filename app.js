@@ -8,6 +8,8 @@ var usersRouter = require('./routes/users.routes');
 const { createInitialAdmin } = require('./utils/initSetup');
 const ApiError = require('./utils/errors');
 
+const cors = require('cors')
+
 
 const initializeApp = async () => {
     try {
@@ -36,6 +38,7 @@ var app = express();
 
 connectDB();
 initializeApp();
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
